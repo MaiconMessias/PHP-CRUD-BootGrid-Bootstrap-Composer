@@ -4,11 +4,12 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="stylesheet" href="css/mainmenu.css" />
+    <script src="js/mainmenu.js"></script>
   </head>
   <body>
     <div class="panel panel-default">
-      <div class="panel-body">
+      <div class="panel-body panel-mainmenu" >
         <ul class="nav nav-pills">
           <li id="hom" role="presentation"><a href="index.php">Principal</a></li>
           <li id="dropMenu" class="dropdown">
@@ -18,9 +19,16 @@
             </ul>
           </li>
         </ul>
+        <div id="dadosUsuario">
+          Olá Visitante
+        </div>
       </div>
     </div>
     <script type="text/javascript" language="JavaScript">
+      $(document).ready(function(){
+          initMainMenu(true);
+      });
+      
       $("#dropMenu").click(function () {
           $("li").removeClass();
           $("#dropMenu").addClass("active");

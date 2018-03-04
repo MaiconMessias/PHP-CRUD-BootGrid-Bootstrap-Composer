@@ -1,0 +1,61 @@
+/* CSS Document */
+
+#container-principal {
+  position: relative;
+  margin: 0 auto;
+  margin-top: 10%;
+  width: 900px;
+  height: 500px;
+  /*border: 2px solid;*/
+}
+
+#container-principal #divLogin .page-header-login {
+  position: absolute;
+  width: 35%;
+  left: 2%;
+  /*border: 2px solid;*/
+}
+
+#container-principal #divLogin .page-header-login h1 {
+  text-align: center;
+  font-weight: bold;
+}
+
+#container-principal #divLogin #formLogin {
+  position: absolute;
+  width: 35%;
+  top: 30%;
+  left: 3%;  
+}
+
+#container-principal .linha-vertical {
+  position: absolute;
+  width: 1px; 
+  height: 80%;/*Altura da linha*/
+  border-left: 1px solid;/* Adiciona borda esquerda na div como ser fosse uma linha.*/
+  color: #e8eaed;
+  left: 41%;
+  top: 25%;
+}
+
+#container-principal #divCadastro .page-header-cadastro {
+  position: absolute;
+  width: 35%;
+  left: 45%;
+}
+
+#container-principal #divCadastro .page-header-cadastro h1 {
+  text-align: center;
+  font-weight: bold;
+}
+
+#container-principal #divCadastro #formCadastro {
+  position: absolute;
+  width: 35%;
+  top: 30%;
+  left: 47%;  
+}
+
+.error{
+  color:red
+}
