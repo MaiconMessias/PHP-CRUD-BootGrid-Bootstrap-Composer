@@ -3,7 +3,9 @@ function iniSearchPage() {
     $("#rg").mask("99.999.999-9");
     $("#edit_cpf").mask("999.999.999-99");
     $("#edit_rg").mask("99.999.999-9");
-
+    $("#filtro_cpf").mask("999.999.999-99");
+    $("#filtro_rg").mask("99.999.999-9");
+    
     var form_add = $("#frm_add");
     var validator = $("#frm_add").validate({
         rules: {
@@ -174,5 +176,92 @@ function iniSearchPage() {
         });
     }
 
+    $("#accordion-filtro").click(function(){
+        limparFiltro();
+    });
+    
+    $("#btn-filtrar").click(function(){
+        aplicarFiltro($("#filtro_id").val(), $("#filtro_nome").val(), 
+                      $("#filtro_rg").val(), $("#filtro_cpf").val());
+    });
+    
+    limparFiltro();
 }
 
+function aplicarFiltro(ID, Nome, RG, CPF) {
+    var filtro = "";
+    
+    if (ID != 0) {
+       if (filtro == "") 
+           filtro += " WHERE ID = " + ID;
+    }
+
+    if (Nome != "") {
+       if (filtro == "") 
+           filtro += " WHERE Nome LIKE '%" + Nome + "%'";
+       else
+           filtro += " AND Nome LIKE '%" + Nome + "%'";
+    }
+    
+    if (RG != "") {
+       if (filtro == "") 
+           filtro += " WHERE RG LIKE '%" + RG + "%'";
+       else
+           filtro += " AND RG LIKE '%" + RG + "%'";
+    }
+
+    if (CPF != "") {
+       if (filtro == "") 
+           filtro += " WHERE CPF LIKE '%" + CPF + "%'";
+       else
+           filtro += " AND CPF LIKE '%" + CPF + "%'";
+    }
+    
+    var dados = {
+        action: "",
+        filtro: filtro
+    };    
+
+    $.ajax({
+        type: "POST",
+        url: "funcionarioController.php",
+        data: dados,
+        dataType: "json",
+        success: function (response) {
+            $("#grid-basic").bootgrid('reload');
+        }
+    });
+}
+
+function limparFiltro() {
+    $("#filtro_id").val(0);    
+    $("#filtro_nome").val("");    
+    $("#filtro_rg").val("");    
+    $("#filtro_cpf").val("");    
+
+    var dados = {
+        action: "",
+        limparfiltro: true
+    };    
+
+    $.ajax({
+        type: "POST",
+        url: "funcionarioController.php",
+        data: dados,
+        dataType: "json",
+        success: function (response) {
+            $("#grid-basic").bootgrid('reload');
+        }
+    });
+    
+      // Alterando icon accordion
+      if ($("#span-accordion").hasClass("glyphicon-chevron-down")) {
+          $("#span-accordion").removeClass("glyphicon-chevron-down");
+          $("#span-accordion").addClass("glyphicon-chevron-up");
+      } else if ($("#span-accordion").hasClass("glyphicon-chevron-up")) {
+          $("#span-accordion").removeClass("glyphicon-chevron-up");
+          $("#span-accordion").addClass("glyphicon-chevron-down");
+      } else {
+          $("#span-accordion").addClass("glyphicon-chevron-up");
+      }
+}

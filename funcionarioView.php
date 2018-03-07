@@ -119,6 +119,40 @@ and open the template in the editor.
         </div>
       </div>
     </div>        
+
+    <!-- Filtros -->
+    <div class="panel panel-default container-filtro-grid">
+        <div class="panel-heading" role="tab" id="headingTwo">
+          <h4 class="panel-title">
+            <a id="accordion-filtro" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Filtro <span id="span-accordion" class="glyphicon" aria-hidden="true"></span>
+            </a>
+          </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse panel-filtro-grid" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            <div class="form-group group-input-id">
+              <label for="filtro_id" class="control-label">ID:</label>
+              <input type="number" min="0" step="0" class="form-control" id="filtro_id" name="filtro_id"/>
+            </div>
+            <div class="form-group group-input-nome">
+              <label for="filtro_nome" class="control-label">Nome:</label>
+              <input type="text" class="form-control" id="filtro_nome" name="filtro_nome"/>
+            </div>
+            <div class="form-group group-input-rg">
+              <label for="filtro_rg" class="control-label">RG:</label>
+              <input type="text" class="form-control" id="filtro_rg" name="filtro_rg"/>
+            </div>
+            <div class="form-group group-input-cpf">
+              <label for="filtro_cpf" class="control-label">CPF:</label>
+              <input type="text" class="form-control" id="filtro_cpf" name="filtro_cpf"/>
+            </div>
+            <button id="btn-filtrar" type="button" class="btn btn-default">
+              Filtrar
+            </button>
+          </div>
+        </div>
+      </div>
     
     <script type="text/javascript" language="JavaScript">
         $(document).ready(function () {

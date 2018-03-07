@@ -9,6 +9,12 @@ $params = $_REQUEST;
 $action = isset($params['action']) != '' ? $params['action'] : '';
 $funciCls = new FuncionarioDAO();
 
+session_start();
+if (isset($params['filtro'])) {
+    $_SESSION['filtro'] = $params['filtro'];
+} else if (!isset($_SESSION['filtro']) || (isset($params['limparfiltro']))) 
+   $_SESSION['filtro'] = "";
+
 switch ($action) {
     case 'add': {
         $funciCls->insertFuncionario($params);
@@ -20,7 +26,7 @@ switch ($action) {
         $funciCls->deleteFuncionario($params);
         break;
     } default: {
-        $funciCls->getAllFuncionarios($params);
+        $funciCls->getAllFuncionarios($params, $_SESSION['filtro']);
         return;
     }
 }

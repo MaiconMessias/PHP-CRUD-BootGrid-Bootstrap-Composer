@@ -18,3 +18,40 @@ and open the template in the editor.
 .error{
   color:red
 }
+
+/*filtro*/
+.container-filtro-grid {
+  margin: 0 auto;
+  width: 1020px;
+  margin-top: 10px;
+}
+
+.container-filtro-grid .panel-filtro-grid {
+  position: relative;
+}
+
+.container-filtro-grid .panel-filtro-grid .group-input-id {
+  /*position: absolute;*/
+  width: 80px;
+}
+
+.container-filtro-grid .panel-filtro-grid .group-input-nome {
+  position: absolute;
+  width: 300px;
+  left: 120px;
+  top: 15px;
+}
+
+.container-filtro-grid .panel-filtro-grid .group-input-rg {
+  position: absolute;
+  width: 150px;
+  left: 440px;
+  top: 15px;
+}
+
+.container-filtro-grid .panel-filtro-grid .group-input-cpf {
+  position: absolute;
+  width: 150px;
+  left: 610px;
+  top: 15px;
+}

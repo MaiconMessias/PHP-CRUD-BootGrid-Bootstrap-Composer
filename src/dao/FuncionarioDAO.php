@@ -22,12 +22,12 @@ class FuncionarioDAO {
         $this->current_page_number = 0;
     }
 
-    public function getAllFuncionarios($params) {
-        $this->data = $this->getAll($params);
+    public function getAllFuncionarios($params, $filtro) {
+        $this->data = $this->getAll($params, $filtro);
         echo json_encode($this->data);
     }
 
-    private function getAll($params) {
+    private function getAll($params, $filtro) {
         // Setando o numero da pagina corrente
         if (isset($params["current"])) {
             $this->current_page_number = $params["current"];
@@ -47,6 +47,10 @@ class FuncionarioDAO {
             $this->query .= " WHERE (nome LIKE '%" . $params["searchPhrase"] . "%' )";
         }
 
+        if (!empty($filtro)) {
+            $this->query .= $filtro;
+        }
+        
         // Alterando consulta para ordenacao da coluna clicada
         $order_by = '';
         if (isset($params["sort"]) && is_array($params["sort"])) {
@@ -60,7 +64,9 @@ class FuncionarioDAO {
         if ($order_by != '') {
             $this->query .= ' ORDER BY ' . substr($order_by, 0, -2);
         }
-
+        
+        // Obtendo o numero total de funcionarios sem o filtro de limit
+        $query1 = $this->query;
         // Limitando numero de registros obtidos no sql
         if ($this->records_per_page != -1) {
             $this->query .= " LIMIT " . $this->records_per_page . " OFFSET " . $this->start_from;
@@ -78,8 +84,6 @@ class FuncionarioDAO {
             );
         }
 
-        // Obtendo o numero total de funcionarios
-        $query1 = "SELECT * FROM funcionario ";
         $result1 = pg_query($this->con, $query1) or die("erro ao obter os dados do funcionário");
         $total_records = pg_num_rows($result1);
 
